@@ -1,22 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "./Home.css";
 import { Link } from "react-router-dom";
 import Navbar from "../Components/Navbar/Navbar";
+import Context from "../Context/apiContext";
 import Electronics from "../Image/electro.jpg";
 
 export default function Home() {
-  const [data, setData] = useState([]);
   const [search, setSearch] = useState("");
 
-  const fetchApi = async () => {
-    const api = await fetch("https://fakestoreapi.com/products/categories");
+  const contex = useContext(Context);
+
+  const [data, setData] = useState([]);
+
+  const fetchProducts = async () => {
+    const api = await fetch("https://fakestoreapi.com/products");
     const response = await api.json();
-    console.log(response);
     setData(response);
   };
 
   useEffect(() => {
-    fetchApi();
+    fetchProducts();
   }, []);
 
   const handleSearch = (event) => {
@@ -29,7 +32,7 @@ export default function Home() {
     <>
       <Navbar />
 
-      <div className="max-w-full flex justify-center my-3">
+      <div className="max-w-full z-10 flex justify-center my-3">
         <form class="flex items-center">
           <label for="simple-search" class="sr-only">
             Search
@@ -83,15 +86,102 @@ export default function Home() {
         </form>
       </div>
 
-      <div className="min-h-[50vh] flex items-center flex-wrap justify-center space-x-3">
-        {data
-          .filter((items) => items.includes(search))
-          .map((items) => (
-            <div className="max-w-full p-6 font-semibold bg-white border border-gray-200 rounded-lg hover:shadow-xl shadow-sm dark:bg-gray-800 dark:border-gray-700">
-              <Link to={`/products/${items}`}> {items}</Link>
+      <section>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div class="grid gap-4">
+            <div>
+              <img
+                class="h-auto max-w-full rounded-lg"
+                src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image.jpg"
+                alt=""
+              />
             </div>
-          ))}
-      </div>
+            <div>
+              <img
+                class="h-auto max-w-full rounded-lg"
+                src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-1.jpg"
+                alt=""
+              />
+            </div>
+            <div>
+              <img
+                class="h-auto max-w-full rounded-lg"
+                src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-2.jpg"
+                alt=""
+              />
+            </div>
+          </div>
+          <div class="grid gap-4">
+            <div>
+              <img
+                class="h-auto max-w-full rounded-lg"
+                src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-3.jpg"
+                alt=""
+              />
+            </div>
+            <div>
+              <img
+                class="h-auto max-w-full rounded-lg"
+                src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-4.jpg"
+                alt=""
+              />
+            </div>
+            <div>
+              <img
+                class="h-auto max-w-full rounded-lg"
+                src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-5.jpg"
+                alt=""
+              />
+            </div>
+          </div>
+          <div class="grid gap-4">
+            <div>
+              <img
+                class="h-auto max-w-full rounded-lg"
+                src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-6.jpg"
+                alt=""
+              />
+            </div>
+            <div>
+              <img
+                class="h-auto max-w-full rounded-lg"
+                src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-7.jpg"
+                alt=""
+              />
+            </div>
+            <div>
+              <img
+                class="h-auto max-w-full rounded-lg"
+                src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-8.jpg"
+                alt=""
+              />
+            </div>
+          </div>
+          <div class="grid gap-4">
+            <div>
+              <img
+                class="h-auto max-w-full rounded-lg"
+                src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-9.jpg"
+                alt=""
+              />
+            </div>
+            <div>
+              <img
+                class="h-auto max-w-full rounded-lg"
+                src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-10.jpg"
+                alt=""
+              />
+            </div>
+            <div>
+              <img
+                class="h-auto max-w-full rounded-lg"
+                src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-11.jpg"
+                alt=""
+              />
+            </div>
+          </div>
+        </div>
+      </section>
     </>
   );
 }
