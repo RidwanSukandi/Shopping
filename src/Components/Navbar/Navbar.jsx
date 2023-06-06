@@ -33,8 +33,9 @@ export default function Navbar() {
               <h1 className="text-white font-bold">Shopping</h1>
               <div className="hidden md:block">
                 <div className="ml-10 flex items-baseline space-x-4">
-                  {data.map((items) => (
+                  {data.map((items, index) => (
                     <Link
+                      key={index}
                       to={`/products/${items}`}
                       className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                     >

@@ -19,7 +19,7 @@ export default function Details() {
       `https://fakestoreapi.com/products/${id.idProduct}`
     );
     const response = await api.json();
-    console.log(response);
+
     setData(response);
   };
 
@@ -60,10 +60,7 @@ export default function Details() {
             <h5 className="font-bold text-sm md:text-xl lg:text-4xl">
               {data.title}
             </h5>
-            <div className="flex flex-wrap lg:text-3xl lg:my-5 gap-1">
-              {/* <p>Penilaian : <span className='font-bold'>{data.rating.rate}</span></p>
-       <p>Terjual : <span className='font-bold'>{data.rating.count}</span></p> */}
-            </div>
+            <div className="flex flex-wrap lg:text-3xl lg:my-5 gap-1"></div>
             <h5 className="font-bold mt-3 text-sm md:text-lg lg:text-4xl text-red-600">
               ${data.price}
             </h5>

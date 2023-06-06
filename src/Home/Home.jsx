@@ -2,13 +2,16 @@ import React, { useEffect, useState, useContext } from "react";
 import "./Home.css";
 import { Link } from "react-router-dom";
 import Navbar from "../Components/Navbar/Navbar";
-import Context from "../Context/apiContext";
-import Electronics from "../Image/electro.jpg";
+import Footer from "../Components/Footer/Footer";
+import ApiContext from "../Context/apiContext";
+import Hero from "../Image/hero-1-new.png";
 
 export default function Home() {
   const [search, setSearch] = useState("");
 
-  const contex = useContext(Context);
+  const context = useContext(ApiContext);
+
+  console.log(context);
 
   const [data, setData] = useState([]);
 
@@ -32,7 +35,7 @@ export default function Home() {
     <>
       <Navbar />
 
-      <div className="max-w-full z-10 flex justify-center my-3">
+      <div className="max-w-full z-10 flex  justify-center my-3">
         <form class="flex items-center">
           <label for="simple-search" class="sr-only">
             Search
@@ -86,102 +89,43 @@ export default function Home() {
         </form>
       </div>
 
-      <section>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div class="grid gap-4">
-            <div>
-              <img
-                class="h-auto max-w-full rounded-lg"
-                src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image.jpg"
-                alt=""
-              />
-            </div>
-            <div>
-              <img
-                class="h-auto max-w-full rounded-lg"
-                src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-1.jpg"
-                alt=""
-              />
-            </div>
-            <div>
-              <img
-                class="h-auto max-w-full rounded-lg"
-                src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-2.jpg"
-                alt=""
-              />
-            </div>
-          </div>
-          <div class="grid gap-4">
-            <div>
-              <img
-                class="h-auto max-w-full rounded-lg"
-                src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-3.jpg"
-                alt=""
-              />
-            </div>
-            <div>
-              <img
-                class="h-auto max-w-full rounded-lg"
-                src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-4.jpg"
-                alt=""
-              />
-            </div>
-            <div>
-              <img
-                class="h-auto max-w-full rounded-lg"
-                src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-5.jpg"
-                alt=""
-              />
-            </div>
-          </div>
-          <div class="grid gap-4">
-            <div>
-              <img
-                class="h-auto max-w-full rounded-lg"
-                src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-6.jpg"
-                alt=""
-              />
-            </div>
-            <div>
-              <img
-                class="h-auto max-w-full rounded-lg"
-                src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-7.jpg"
-                alt=""
-              />
-            </div>
-            <div>
-              <img
-                class="h-auto max-w-full rounded-lg"
-                src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-8.jpg"
-                alt=""
-              />
-            </div>
-          </div>
-          <div class="grid gap-4">
-            <div>
-              <img
-                class="h-auto max-w-full rounded-lg"
-                src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-9.jpg"
-                alt=""
-              />
-            </div>
-            <div>
-              <img
-                class="h-auto max-w-full rounded-lg"
-                src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-10.jpg"
-                alt=""
-              />
-            </div>
-            <div>
-              <img
-                class="h-auto max-w-full rounded-lg"
-                src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-11.jpg"
-                alt=""
-              />
-            </div>
-          </div>
+      <section className="px-4 flex lg:flex-nowrap flex-wrap gap-3">
+        <div className=" w-full lg:w-6/12">
+          <img
+            className="w-[500px] h-[550px] sm:w-full rounded-lg "
+            src={Hero}
+            alt=""
+          />
+        </div>
+        <div className="flex items-center flex-wrap lg:w-6/12 ">
+          <h1 className="text-xl font-bold text-cyan-600 xl:mx-6 ">
+            Selamat datang di toko kami toko kami siap melayani anda
+          </h1>
         </div>
       </section>
+
+      <section className=" ">
+        <div className="px-4 py-7 mx-4 mt-8 bg-white shadow-md border-b border-gray-400">
+          <h1 className="text-cyan-600 font-bold">Product terlaris</h1>
+        </div>
+        <div className="mx-4  bg-white px-2  py-7 flex flex-col md:flex-row items-center gap-4 justify-center  md:justify-evenly">
+          {data.slice(11, 16).map((items) => (
+            <Link to={`products-details/${items.id}`}>
+              <div>
+                <img
+                  className="w-full md:w-20 md:h-20"
+                  src={items.image}
+                  alt=""
+                />
+                <h2 className="  md:w-full font-bold mt-3">
+                  {items.title.slice(0, 15)}
+                </h2>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+      <Footer />
     </>
   );
 }
